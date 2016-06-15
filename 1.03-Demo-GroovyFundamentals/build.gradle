@@ -146,3 +146,19 @@ noArgs()
 //noArgs // Doesn't work
 //twoArgs oneArg 500, 200 // Also doesn't work as it's ambiguous
 twoArgs oneArg(500), 200 // Fixed the ambiguity
+
+def isPrime(x){
+    if(x%2==0)
+        return false
+    if(x==2 || x==3)
+        return true
+    def sqrt = (int)Math.sqrt(x)
+    for(int i=3;i<=sqrt;i=i+2){
+        if(x%i==0)
+            return false
+    }
+    return true
+}
+
+def num = 65
+println "is $num prime = ${isPrime(num)}"

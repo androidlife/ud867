@@ -13,38 +13,59 @@ task stringsAndTypes << {
 
 
     // TODO: Create a variable named foo and assign it the value 4.2
+    def foo = 4.2
 
     // TODO: Print the value and class of foo
-
+    println "The value of foo = $foo and class of foo = ${foo.class}"
     // TODO: Use string interpolation to print the square root of 127
     // HINT: http://docs.oracle.com/javase/7/docs/api/java/lang/Math.html
+    println "The square root of 127 = ${getSquareRoot(127)}"
 
     // TODO: Assign the current date to foo and print it, along with its type
     // HINT:
     // http://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html
+    foo = new Date()
+    println "The current date of foo = $foo and class of foo = ${foo.class}"
 
     // TODO: Use the `substring` method to extract my name from this string
     def hello = "Hello, Jeremy.";
+    
 
     // TODO: Use `toUpperCase` to capitalize and print my name
+    println "My Name = ${(hello.substring(7,hello.length())).toUpperCase()}"
+}
 
+def getSquareRoot(x){
+    def epsilon = 1e-15
+    double t = x
+    while(Math.abs(t-x/t)>epsilon*t){
+        t= (x/t+t)/2.0
+    }
+    return t
 }
 
 task closures << {
     // TODO: Declare a closure that takes two arguments and adds them together
     // HINT: http://www.groovy-lang.org/closures.html
+    def addTwo = {
+        x,y -> x+y
+    }
 
     // TODO: Call your closure with arguments 17 and 25, and print the result
     // Beware that something like `println addTwo 17, 25` is ambiguous
+    println "The sum of 17 and 25 = ${addTwo (17, 25)}"
 }
 
 task lists << {
     // TODO: Declare a list containing 5 of your favorite candies
     // HINT: Try searching for "groovy list literal"
+    def candies = ["Orange Ball","Black Ball","Jems","Cotton Candy","Eclairs"]
 
     // TODO: Create a new list of your candies in all caps
+    def candiesCap = candies.collect{it.toUpperCase()}
     // HINT: http://mrhaki.blogspot.ca/2010/05/groovy-goodness-use-collect-with.html
 
     // TODO: Print each capital candy
+    candiesCap.each{println "$it"}
 
 }
