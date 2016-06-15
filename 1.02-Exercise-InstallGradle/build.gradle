@@ -110,6 +110,10 @@ task helloWorld << {
     println "Hello, World!"
 }
 
+task printVersion(type: Exec){
+  commandLine './version.sh'
+}
+
 /*
 
 ************ Java Installation Instructions **********

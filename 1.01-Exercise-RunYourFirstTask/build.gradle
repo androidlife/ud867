@@ -25,6 +25,14 @@ task hello {
     description "Hey student! Run this one :D"
     group "Our demo"
     doLast {
-        println "Hello World!"
+        println "Santosh Dhakal"
     }
+}
+
+task printName << {
+  if(project.has('name')){
+    println "Your name is ${project.get('name')}"
+  }else{
+   println 'No Name Provided'
+  }
 }
