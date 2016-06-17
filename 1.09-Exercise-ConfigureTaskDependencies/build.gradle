@@ -40,31 +40,59 @@ task brew {
 }
 
 task pour {
+    dependsOn brew
     doLast {
         println "Pouring. Glug, glug, glug."
     }
 }
 
 task addSweetener {
+    dependsOn pour
     doLast {
         println "Adding sweetener. Stir, stir, stir."
     }
 }
 
 task drink {
+    dependsOn pour
+    mustRunAfter addSweetener
     doLast {
         println "Drinking. Gulp, gulp, gulp."
     }
 }
 
 task blackCoffee {
+    dependsOn drink
     doLast {
         println "Mmmm, bitter! just how I like it."
     }
 }
 
 task sweetCoffee {
+    dependsOn = [addSweetener,drink]
     doLast {
         println "Mmmm, sweet! just how I like it."
+    }
+}
+
+task printOtherTasks{
+    description "This prints all the tasks with group other"
+    group "Printing Other Task"
+    doLast{
+       def cloneTasks = []
+       tasks.each{
+         task -> task.dependsOn.each{
+            item -> if(item.hasProperty('name')){
+                cloneTasks.remove(item)
+                cloneTasks.add(item)
+            }
+         }
+       }
+       def otherTasks = tasks - cloneTasks
+       otherTasks.remove(printOtherTasks)
+       println "Other tasks = Tasks no one depensOn:"
+       otherTasks.each{
+         println "${it.name}"
+       }
     }
 }

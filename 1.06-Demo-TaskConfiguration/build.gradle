@@ -137,6 +137,8 @@ task myTask7 {
 
 One more important piece of syntax. There are some task properties you can set
 using the following syntax:
+This is just like 
+myTask8.description "Another description"
 
 */
 
@@ -158,3 +160,26 @@ configuration block. We'll talk more task types that when we work with file
 system tasks.
 
 */
+
+def tasksList = project.getTasks()
+/*
+Seems like the function printTasks can't find tasksList even though they are in the same 
+build.gradle, if they are in the same class , I believe it can use the tasksList, right now
+printTasks() is itself considered as a new object and it doesn't have any reference of tasksList
+*/
+def printTasks(x){
+    x.each{
+        println "Task name = ${it.name}"
+    }
+}
+printTasks(tasksList)
+
+class TaskCollection{
+    def foo = "This is foo"
+    // this class can't access project, I believe it needs to be passed on it
+    //def tasksLists = project.getTasks()
+    def printFoo(){
+        println "foo = $foo"
+    }
+}
+new TaskCollection().printFoo()
