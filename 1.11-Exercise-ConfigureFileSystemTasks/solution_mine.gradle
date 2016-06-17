@@ -24,27 +24,41 @@
         a) Delete the "help" folder created by the "copyWeb" task.
 */
 
-task copyWeb(type: Copy){
+task srcweb(type: Copy){
     from 'src/web'
-    from ('src/docs'){
-        into 'help'
-        include '*.txt'
-    }
     into 'build/web'
 }
+task helpweb(type: Copy){
+    from 'src/docs'
+    into 'build/web/help'
+}
+task copyWeb{
+    dependsOn = [srcweb,helpweb]
+}
 
-task bundleWeb(type: Zip,dependsOn: copyWeb){
+task bundleWeb(type: Zip){
+    //depensOn copyWeb
     destinationDir = file('build')
-    from ('build/web')
-    exclude 'images'
     archiveName 'web.zip'
+    from ('build'){
+        excludes = ['web/images','*.zip']
+    }
 }
 
-task unpackBundle(type:Copy, dependsOn: bundleWeb){
-    from zipTree('build/web.zip')
-    into 'build/exploded'
+// task copyZip(type: Copy){
+//     from 'build'
+//     include 'web.zip'
+//     into 'build/exploded'
+// }
+task unzip(type: Exec){
+    commandLine './unzipper.sh'
+    args = ["build/web.zip","build/exploded"]
+}
+task unpackBundle{
+    dependsOn = [unzip]
 }
 
-task deleteHelp(type:Delete, dependsOn: copyWeb){
+task deleteHelp(type: Delete){
     delete 'build/web/help'
 }
+
