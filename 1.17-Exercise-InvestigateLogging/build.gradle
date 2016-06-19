@@ -24,16 +24,39 @@ Exercises:
 */
 
 task hello(type: HelloTask)
+// gradle hello -i to show info message
+/*
+  gradle hello -d 
+  executes the task with all the log messages
+  grep: grep command is finding out text or pattern in a text or a file
 
+  gradle hello -d = some command or spit out some output
+  gradle hello -d | grep "Catch me if you can"
+  | = piping , which is simply stating that execute that command and spit out or push the output to 
+   grep
+   So the output of gradle hello -d becomes input to grep now
+   grep "someText" , now will begin to search the text in that input or not
+   If found shows the output else doesn't show any output
+
+   so if you want to see what are quiet messages 
+   gradle hello -d | grep "QUIET"
+   or for lifecycle
+   gradle hello -d | grep "LIFECYCLE"
+*/
 class HelloTask extends DefaultTask {
     @TaskAction
     void doAction() {
-        println 'Hello World'
+      logger.info("*** Start doAction ****")
+      println 'Hello World as Quiet'
+      logger.lifecycle 'Hello World LifeCycle'
+      logger.debug "Catch me if you can"
+      logger.info("--- Stop doAction ----")
     }
 }
 
-/*
+
 task derpy << {
-    primp "Herp de derp"
+    //primp "Herp de derp"
+    print "Herp de derp"
 }
-*/
+

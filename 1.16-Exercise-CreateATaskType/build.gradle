@@ -13,5 +13,27 @@ Exercises:
    "Executing my custom task." to the console.
 3. Create a new task in your build script of type HelloTask named "hello".
 4. Run the "hello" task and observe the output.
-
 */
+
+class HelloTask extends DefaultTask{
+	def message
+
+	@TaskAction
+	void printSomething(){
+		println message
+	}
+
+	@TaskAction
+	void printAnotherThing(){
+		println "This is another message"
+	}
+
+	// @TaskAction
+	// void double(){
+	// 	x -> x+x
+	// }
+}
+
+task hello(type: HelloTask){
+	message = "Executing my custom task."
+}
