@@ -10,3 +10,15 @@ Exercises:
    file.
 
 */
+apply plugin: 'java'
+ext{
+	implementationTitle = "MakingOfJar"
+	implementationVersion = "1.0"
+}
+
+jar{
+	manifest{
+		attributes("Implementation-Title": implementationTitle,
+			"Implementation-Version": implementationVersion)
+	}
+}

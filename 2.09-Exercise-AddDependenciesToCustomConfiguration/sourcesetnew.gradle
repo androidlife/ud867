@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+sourceSets{
+	laaptu{
+		java.srcDir 'custom'
+		output.classesDir 'build/classes/laaptu'
+	}
+	raaptu
+}
+
+repositories{
+	mavenCentral()
+}
+
+
+dependencies{
+	compile 'com.google.guava:guava:18.0'
+	compile 'com.google.code.gson:gson:2.7'
+	laaptuCompile 'com.google.guava:guava:18.0'
+	laaptuCompile 'com.google.code.gson:gson:2.7'
+}
+
+
+
+
+task someTest(type:Test){
+	classpath = project.sourceSets.laaptu.runtimeClasspath
+}

@@ -27,6 +27,20 @@ http://search.maven.org/
 
 apply plugin: 'java'
 
+repositories{
+	mavenCentral()
+	flatDir{
+		dirs = ['libs']
+	}
+}
+dependencies{
+	compile 'org.apache.commons:commons-io:1.3.2'
+}
+
 task printDependencies << {
     configurations.compile.each { println it.name }
 }
+
+// task dependencies << {
+// 	println "Does gradle reserve task name ? yes it does. now it simply overrides the dependencies and this will only work"
+// }

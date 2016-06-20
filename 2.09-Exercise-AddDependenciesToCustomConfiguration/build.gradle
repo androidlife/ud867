@@ -25,6 +25,30 @@ https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html
 
 apply plugin: 'java'
 
+
+
+configurations{
+	deps
+	compile.extendsFrom(deps)	
+	
+}
+
 repositories {
     mavenCentral()
+}
+
+dependencies{
+	deps 'com.google.guava:guava:19.0'
+}
+
+task zipDeps(type: Zip){
+	baseName 'dependencyArchive'
+	classifier 'deps'
+	from configurations.deps
+	destinationDir = file("build/deps")
+}
+task unzipDeps(type:Copy,dependsOn: zipDeps){
+	//from zipTree('build/deps/dependencyArchive-deps.zip')
+	from zipTree(zipDeps.destinationDir.getPath()+"/"+zipDeps.baseName+"-"+zipDeps.classifier+".zip")
+	into 'build/deps/unzip/'
 }

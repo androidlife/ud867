@@ -101,6 +101,25 @@ task getReady {
     dependsOn = ["takeShower", "eatBreakfast", "putOnShoes"]
 }
 
+
+task printdependencies {
+    doLast{
+        if(project.has('taskName')){
+            String taskName = project.get("taskName")
+            def taskMain = tasks.find{
+                task -> task.name == taskName
+            }
+            if(taskMain !=null){
+                taskMain.dependsOn.each{
+                    println "$it"
+                }
+            }else {
+                println "Task not found"
+            }
+        }
+    }
+}
+
 /*
 
 Oops, we put on our shoes before taking a shower! Let's put in another
