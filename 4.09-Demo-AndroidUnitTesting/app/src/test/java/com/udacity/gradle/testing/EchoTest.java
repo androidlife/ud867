@@ -10,6 +10,7 @@ public class EchoTest {
 
     @Test
     public void verifyLoggingEchoResponse() {
-        assert Echo.echo("hello", true).equals("hello");
+
+        assert Echo.echo("hello", false).equals("hello");
     }
 }

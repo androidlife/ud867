@@ -20,3 +20,40 @@ solution file into this one.
 */
 
 //apply from: "solution.gradle"
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceSets{
+	main.java.srcDir 'joke'
+}
+
+task tellJoke {
+	group 'Jokes'
+	description 'Black metal bank joke'
+	doLast{
+    println "What's a build master's favorite black metal band?"
+    println "Gradle of Filth!"
+    }
+}
+
+task tellAnotherJoke{
+   group 'Jokes'
+   description 'Master build tools'
+   doLast{
+   println "How long does it take to master build tools?"
+   println "From the Gradle to the grave."
+  }
+}
+
+task displayRunDependencies<<{
+	def runTasks = tasks.matching {
+		 task -> task !=null && task.name == 'run'
+	}
+	if(runTasks !=null){
+		def runTask = runTasks[0]
+		//println "${runTask.dependsOn.size()}"
+		runTask.dependsOn.each{
+			println "$it"
+		}
+	}
+}

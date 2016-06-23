@@ -1,9 +1,10 @@
 package com.udacity.gradle.testing.paid;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 
 public class PaidEchoTest {
     @Test
@@ -17,7 +18,7 @@ public class PaidEchoTest {
 
     @Test
     public void verifyLoggingEchoResponse() {
-        Collection<String> strings = PaidEcho.echo("hello", 10, true);
+        Collection<String> strings = PaidEcho.echo("hello", 10, false);
         assertEquals(strings.size(), 10);
         for (String string : strings) {
             assertEquals(string, "hello");

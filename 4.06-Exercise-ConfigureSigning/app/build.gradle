@@ -30,10 +30,20 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs{
+        release{
+            keyAlias 'udacity'
+            keyPassword 'udacity'
+            storePassword 'udacity'
+            storeFile file("$rootDir/udacity.jks")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

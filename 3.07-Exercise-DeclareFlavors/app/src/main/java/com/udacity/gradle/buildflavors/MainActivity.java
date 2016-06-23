@@ -1,5 +1,6 @@
 package com.udacity.gradle.buildflavors;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -50,6 +52,7 @@ public class MainActivity extends ActionBarActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+        TextView textView;
 
         public PlaceholderFragment() {
         }
@@ -58,7 +61,15 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            textView =(TextView)rootView.findViewById(R.id.product_flavor_textview);
             return rootView;
+        }
+
+        @Override
+        public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+            String packageName = getActivity().getPackageName();
+            //textView.append(": "+packageName);
+            super.onActivityCreated(savedInstanceState);
         }
     }
 }

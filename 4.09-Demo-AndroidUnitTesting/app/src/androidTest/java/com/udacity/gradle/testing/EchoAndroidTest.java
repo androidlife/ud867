@@ -8,6 +8,7 @@ public class EchoAndroidTest extends AndroidTestCase {
     }
 
     public void testVerifyLoggingEchoResponse() {
+        //PaidEcho.echo("hello",true);
         assertEquals("hello", Echo.echo("hello", true));
     }
 }

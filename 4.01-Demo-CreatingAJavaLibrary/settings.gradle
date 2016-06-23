@@ -16,4 +16,4 @@ directory.
 
 */
 
-include ':app', ':javaJokes'
+include ':app', ':javaJokes',':laaptu'

@@ -33,12 +33,12 @@ android {
 
     defaultConfig {
         applicationId "com.udacity.gradle.multidex"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         // Remove this comment to fix 65k method limit error
-        // multiDexEnabled true
+        multiDexEnabled true
     }
     buildTypes {
         release {
